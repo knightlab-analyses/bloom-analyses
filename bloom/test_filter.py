@@ -26,16 +26,20 @@ class TestFilter(unittest.TestCase):
             ['s1', 's2', 's3'])
 
     def test_trim_seqs(self):
-        seqs = trim_seqs(self.seqs, length=6)
+        seqs = trim_seqs(self.seqs, seqlength=6)
         exp = [skbio.Sequence('AACCGG'),
                skbio.Sequence('AACCGA'),
                skbio.Sequence('AACCTT'),
                skbio.Sequence('AACCGC')]
         self.assertEqual(list(seqs), exp)
 
+    def test_trim_seqs_error(self):
+        with self.assertRaises(ValueError):
+            list(trim_seqs(self.seqs, seqlength=20))
+
     def test_remove_seqs(self):
-        seqs = trim_seqs(self.seqs, length=6)
-        res = remove(self.table, seqs)
+        seqs = trim_seqs(self.seqs, seqlength=6)
+        res = remove_seqs(self.table, seqs)
         exp = Table(
             np.array([
                 [0, 1, 1],
