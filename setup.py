@@ -1,11 +1,5 @@
-import os
-import platform
-import re
-import ast
-import sys
-
 from setuptools import find_packages, setup
-from setuptools.extension import Extension
+
 
 import numpy as np
 
