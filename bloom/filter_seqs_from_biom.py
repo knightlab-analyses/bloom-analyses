@@ -39,7 +39,7 @@ def remove_seqs(table, seqs):
     """
     filter_seqs = {str(s) for s in seqs}
     _filter = lambda v, i, m: i in filter_seqs
-    table.filter(_filter, axis='observation')
+    table.filter(_filter, axis='observation', invert=True)
     return table
 
 
@@ -52,10 +52,7 @@ def main(argv):
     parser.add_argument('-o','--output',
                         help='output biom file name')
     parser.add_argument('-f','--fasta',
-                        help='fitering fasta file name')
-    parser.add_argument('--ignore-table-seq-length',
-                        help="don't trim fasta file sequences to table read length",
-                        action='store_true')
+                        help='filtering fasta file name')
 
     args=parser.parse_args(argv)
 

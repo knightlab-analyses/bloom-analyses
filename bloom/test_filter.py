@@ -41,13 +41,8 @@ class TestFilter(unittest.TestCase):
         seqs = trim_seqs(self.seqs, seqlength=6)
         res = remove_seqs(self.table, seqs)
         exp = Table(
-            np.array([
-                [0, 1, 1],
-                [0, 2, 1],
-                [1, 0, 1],
-                [0, 0, 1]]),
-            ['AACCGG', 'AACCGA',
-             'AACCTT', 'AACCGC'],
+            np.array([[9, 1, 1]]),
+            ['AAAAAA'],
             ['s1', 's2', 's3'])
         npt.assert_array_equal(np.array(exp.matrix_data.todense()),
                                np.array(res.matrix_data.todense()))
