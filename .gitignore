@@ -50,3 +50,6 @@ doc/source/generated
 
 # IPythnon checkpoints
 .ipynb_checkpoints
+
+# Image files
+*.pdf
