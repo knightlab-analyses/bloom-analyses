@@ -1,6 +1,11 @@
+#!/usr/bin/env python
+
+import skbio
 import biom
 import argparse
 import sys
+
+__version__='1.0'
 
 
 def trim_seqs(seqs, seqlength=100):
@@ -24,6 +29,7 @@ def trim_seqs(seqs, seqlength=100):
 
         yield seq[:seqlength]
 
+
 def remove_seqs(table, seqs):
     """
     Parameters
@@ -45,22 +51,30 @@ def remove_seqs(table, seqs):
 
 def main(argv):
     parser=argparse.ArgumentParser(
-        description='Filter sequences from biom table using a fasta file. Version ' + \
-        __version__)
+        description='Filter sequences from biom table using a fasta file. Version ' + __version__)
     parser.add_argument('-i','--inputtable',
                         help='input biom table file name')
     parser.add_argument('-o','--output',
                         help='output biom file name')
     parser.add_argument('-f','--fasta',
                         help='filtering fasta file name')
+    parser.add_argument('-n','--number',
+                        help='number of OTUs from the fasta file to use (0 means all)',
+                        default=0,type=int)
+    parser.add_argument('--ignore_table_seq_length',
+                        help="don't trim the fasta file sequences to the biom table sequence length",
+                        action='store_true')
 
     args=parser.parse_args(argv)
 
-    seqs = skbio.read(args.fasta)
-    table = load_table(args.inputtable)
+    seqs = skbio.read(args.fasta,format='fasta')
+    table = biom.load_table(args.inputtable)
     length = min(map(len, table.ids(axis='observation')))
-    if not parse.ignore_table_seq_length:
-        seqs = trim_seqs(seqs, length=length)
+    if not args.ignore_table_seq_length:
+        seqs = trim_seqs(seqs, seqlength=length)
+
+    if args.number>0:
+        seqs=seqs[:args.number]
 
     outtable = remove_seqs(table, seqs)
 
