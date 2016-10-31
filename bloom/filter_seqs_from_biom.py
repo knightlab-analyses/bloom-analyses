@@ -59,8 +59,8 @@ def main(argv):
     parser.add_argument('-f','--fasta',
                         help='filtering fasta file name')
     parser.add_argument('-n','--number',
-                        help='number of sOTUs from the fasta file to use (0 means all)',
-                        default=0,type=int)
+                        help='number of sOTUs from the fasta file to use (-1 means all)',
+                        default=-1,type=int)
     parser.add_argument('--ignore_table_seq_length',
                         help="don't trim the fasta file sequences to the biom table sequence length",
                         action='store_true')
@@ -77,7 +77,7 @@ def main(argv):
 
     # if need to remove only a subset of the sOTUs from the fasta file
     seqs = list(seqs)
-    if args.number > 0:
+    if args.number >= 0:
         if len(seqs) > args.number:
             seqs = seqs[:args.number]
 
