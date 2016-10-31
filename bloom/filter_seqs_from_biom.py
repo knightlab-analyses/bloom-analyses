@@ -59,7 +59,7 @@ def main(argv):
     parser.add_argument('-f','--fasta',
                         help='filtering fasta file name')
     parser.add_argument('-n','--number',
-                        help='number of OTUs from the fasta file to use (0 means all)',
+                        help='number of sOTUs from the fasta file to use (0 means all)',
                         default=0,type=int)
     parser.add_argument('--ignore_table_seq_length',
                         help="don't trim the fasta file sequences to the biom table sequence length",
@@ -69,14 +69,23 @@ def main(argv):
 
     seqs = skbio.read(args.fasta,format='fasta')
     table = biom.load_table(args.inputtable)
+    totorigreads = table.sum(axis='whole')
+    print('loaded biom table %s containing %d unique sOTUs' % (args.inputtable,table.shape[0]))
     length = min(map(len, table.ids(axis='observation')))
     if not args.ignore_table_seq_length:
         seqs = trim_seqs(seqs, seqlength=length)
 
-    if args.number>0:
-        seqs=seqs[:args.number]
+    # if need to remove only a subset of the sOTUs from the fasta file
+    seqs = list(seqs)
+    if args.number > 0:
+        if len(seqs) > args.number:
+            seqs = seqs[:args.number]
 
+    print('filtering %d sOTUs (from file %s)' % (len(seqs), args.fasta))
     outtable = remove_seqs(table, seqs)
+    totfilteredreads = outtable.sum(axis='whole')
+    print('removed %d reads (from %d to %d)' % (totorigreads - totfilteredreads, totorigreads, totfilteredreads))
+    print('saving filtered biom table with %d sOTUs to file %s' % (outtable.shape[0], args.output))
 
     with biom.util.biom_open(args.output, 'w') as f:
         outtable.to_hdf5(f, "filterbiomseqs")
