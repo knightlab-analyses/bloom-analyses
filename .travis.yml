@@ -1,0 +1,21 @@
+language: python
+env:
+  - PYTHON_VERSION=3.5
+before_install:
+  - wget http://repo.continuum.io/miniconda/Miniconda3-3.7.3-Linux-x86_64.sh -O miniconda.sh
+  - chmod +x miniconda.sh
+  - ./miniconda.sh -b
+  - export PATH=/home/travis/miniconda3/bin:$PATH
+  # Update conda itself
+  - conda update --yes conda
+install:
+  - conda create --yes -n env_name python=$PYTHON_VERSION pip numpy scipy nose h5py
+  - source activate env_name
+  - conda install --yes numpy jupyter seaborn matplotlib=1.5.1
+  - pip install scikit-bio
+  - pip install coveralls
+  - pip install --process-dependency-links .
+script:
+  - nosetests --with-doctest --with-coverage
+after_success:
+  - coveralls
