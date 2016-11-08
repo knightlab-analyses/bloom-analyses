@@ -13,6 +13,8 @@ pip install biom-format
 
 pip install scikit-bio
 
+pip install emperor --pre
+
 pip install -e .
 
 ```
