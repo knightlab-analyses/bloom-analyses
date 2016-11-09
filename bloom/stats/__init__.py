@@ -7,6 +7,6 @@
 # ----------------------------------------------------------------------------
 
 from __future__ import absolute_import, division, print_function
-from bloom.stats._ancom import ancom
+from bloom.stats.permutation import permutation_mean
 
-__all__ = ['ancom']
+__all__ = ['permutation_mean']
