@@ -7,7 +7,7 @@ A repository containing analyses used to perform bloom filtering
 To reproduce the analyses in the analyses in `ipynb`, run the following commands
 
 ```
-conda create -n bloom pip python=3 numpy jupyter seaborn matplotlib=1.5.1 h5py
+conda create -n bloom pip python=3 numpy jupyter seaborn matplotlib=1.5.1 h5py statsmodels
 
 pip install biom-format
 
