@@ -31,7 +31,7 @@ setup(name='bloom_analyses',
       packages=find_packages(),
       include_dirs=[np.get_include()],
       install_requires=[
-          'scikit-bio', 'numpy', 'biom-format'
+          'scikit-bio', 'numpy', 'biom-format', 'pandas', 'seaborn'
       ],
       classifiers=classifiers,
       package_data={

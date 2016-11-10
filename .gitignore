@@ -53,3 +53,7 @@ doc/source/generated
 
 # Image files
 *.pdf
+
+# Rarefied files
+data/alpha/**
+data/rarefaction/**
