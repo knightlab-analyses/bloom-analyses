@@ -139,32 +139,6 @@ def permutation_mean(table, grouping, permutations=1000, random_state=None):
         `"m"` is the t-statistic.
         `"pvalue"` is the p-value calculated from the permutation test.
 
-    Examples
-    --------
-    >>> from canvas.stats.permutation import fisher_mean
-    >>> import pandas as pd
-    >>> table = pd.DataFrame([[12, 11, 10, 10, 10, 10, 10],
-    ...                       [9,  11, 12, 10, 10, 10, 10],
-    ...                       [1,  11, 10, 11, 10, 5,  9],
-    ...                       [22, 21, 9,  10, 10, 10, 10],
-    ...                       [20, 22, 10, 10, 13, 10, 10],
-    ...                       [23, 21, 14, 10, 10, 10, 10]],
-    ...                      index=['s1','s2','s3','s4','s5','s6'],
-    ...                      columns=['b1','b2','b3','b4','b5','b6','b7'])
-    >>> grouping = pd.Series([0, 0, 0, 1, 1, 1],
-    ...                      index=['s1','s2','s3','s4','s5','s6'])
-    >>> results = fisher_mean(table, grouping,
-    ...                       permutations=100, random_state=0)
-    >>> results
-                m    pvalue
-    b1  14.333333  0.108911
-    b2  10.333333  0.108911
-    b3   0.333333  1.000000
-    b4   0.333333  1.000000
-    b5   1.000000  1.000000
-    b6   1.666667  1.000000
-    b7   0.333333  1.000000
-
     Notes
     -----
     Only works on binary classes.
