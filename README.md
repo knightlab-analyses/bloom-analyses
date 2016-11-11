@@ -18,6 +18,5 @@ pip install -e .
 All analysis notebooks can be initialized by running the command `jupyter notebook` from the terminal.
 
 * [**ag\_alpha\_diversity.ipynb**](ipynb/ag\_alpha\_diversity.ipynb): Evaluates the effect of the identified bloom sequences on the difference in alpha diversity in the [American Gut Project](http://americangut.org/) data
-* [**bloom_example.ipynb**](ipynb/bloom_example.ipynb) Demonstrates how the technique can be applied to filter out sequences in studies
 * [**effect-of-blooms-on-bray-curtis-distance.ipynb**](ipynb/effect-of-blooms-on-bray-curtis-distance.ipynb): Evaluates changes in beta diversity between samples shipped through local post and samples that were frozen shortly after collection.
 * [**identify-candidate-blooms.ipynb**](ipynb/identify-candidate-blooms.ipynb): Identifies the bloom sequences in the American Gut data based on comparison with storage studies and fresh frozen samples.
