@@ -44,7 +44,7 @@ def remove_seqs(table, seqs):
     biom.Table
     """
     filter_seqs = {str(s) for s in seqs}
-    _filter = lambda v, i, m: i not in filter_seqs
+    _filter = lambda v, i, m: i in filter_seqs
     return table.filter(_filter, axis='observation', inplace=False)
 
 
